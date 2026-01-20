@@ -1,0 +1,6 @@
+@"
+:{`$PORT} {
+  root * /app
+  file_server
+}
+"@ | Set-Content -Encoding UTF8 "Caddyfile"
