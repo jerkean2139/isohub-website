@@ -1,1 +1,1 @@
-"root: ." | Set-Content -Encoding UTF8 "Staticfile"
+﻿root: .

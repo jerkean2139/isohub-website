@@ -1,15 +1,59 @@
-@'
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>ISOHub</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
-  <h1>Welcome to ISOHub</h1>
-  <p>This is the public site. The app lives at app.isohub.io</p>
-  <a href="https://app.isohub.io">Login</a>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1" />
+    <meta name="theme-color" content="#FFD700" />
+    <meta name="description" content="Comprehensive merchant services residual tracking system for Independent Sales Organizations" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="ISO Hub" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+    <title>ISO Hub Residuals</title>
+    <script type="module" crossorigin src="/assets/index-xdrTazsQ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bv4n5TtC.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Register service worker for PWA functionality (production only)
+      // Skip registration on localhost, 127.0.0.1, ::1, replit.dev, and any non-production environment
+      (function() {
+        var host = window.location.hostname;
+        var isLocal = host === 'localhost' || 
+                      host === '127.0.0.1' || 
+                      host === '::1' ||
+                      host.includes('replit.dev') ||
+                      host.includes('replit.app') ||
+                      host.includes('repl.co') ||
+                      host.endsWith('.local');
+        
+        if ('serviceWorker' in navigator && !isLocal) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js')
+              .then(function(registration) {
+                console.log('SW registered: ', registration);
+              })
+              .catch(function(registrationError) {
+                console.log('SW registration failed: ', registrationError);
+              });
+          });
+        } else {
+          // Unregister any existing service workers in development
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+              for (var i = 0; i < registrations.length; i++) {
+                registrations[i].unregister();
+                console.log('SW unregistered in dev environment');
+              }
+            });
+          }
+        }
+      })();
+    </script>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
 </html>
-'@ | Set-Content -Encoding UTF8 "index.html"
